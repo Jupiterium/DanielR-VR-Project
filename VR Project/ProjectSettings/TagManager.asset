@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - SwingAnchor
+  - Box
   layers:
   - Default
   - TransparentFX
@@ -12,12 +13,12 @@ TagManager:
   - 
   - Water
   - UI
-  - SwingAnchor
   - 
   - 
   - 
   - 
-  - 
+  - Player
+  - Grabbable
   - 
   - 
   - 
