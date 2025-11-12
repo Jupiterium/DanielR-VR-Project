@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1977062424719036909}
   - component: {fileID: 7110684432707645205}
   - component: {fileID: 3280301100002754012}
-  - component: {fileID: 7930666333976244496}
+  - component: {fileID: 6746561269057835635}
   m_Layer: 11
   m_Name: Fragile Core
   m_TagString: Untagged
@@ -252,11 +252,11 @@ MonoBehaviour:
   m_AngularVelocityScale: 1
   m_TrackPosition: 1
   m_SmoothPosition: 1
-  m_SmoothPositionAmount: 8
+  m_SmoothPositionAmount: 9.48
   m_TightenPosition: 0.1
   m_TrackRotation: 1
   m_SmoothRotation: 1
-  m_SmoothRotationAmount: 8
+  m_SmoothRotationAmount: 9.41
   m_TightenRotation: 0.1
   m_TrackScale: 1
   m_SmoothScale: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
---- !u!114 &7930666333976244496
+--- !u!114 &6746561269057835635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

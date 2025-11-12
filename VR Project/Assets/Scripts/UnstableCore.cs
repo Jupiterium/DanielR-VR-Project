@@ -6,8 +6,6 @@ public class UnstableCore : MonoBehaviour
     public float coreLifetime = 15f; // Meltdown timer
     public int pointsOnDetonate = -1; // Lose 1 point
     public int pointsOnSocket = 1;
-    
-    // Maybe add VFX, particales
 
     private XRGrabInteractable grabInteractable;
     private GameManager gameManager;
@@ -33,8 +31,6 @@ public class UnstableCore : MonoBehaviour
     private void OnRelease(SelectExitEventArgs args)
     {
         isGrabbed = false;
-        
-        // Might need to work with the timer
     }
 
     void Update()
@@ -61,6 +57,11 @@ public class UnstableCore : MonoBehaviour
         isSocketed = true;
         isGrabbed = false;
         if (gameManager) gameManager.AddPoint(pointsOnSocket);
+
+        // This makes the core "stick" and become non-grabbable
+        GetComponent<XRGrabInteractable>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+
         // Stop beeping, set material to "stable"
         this.enabled = false;
     }

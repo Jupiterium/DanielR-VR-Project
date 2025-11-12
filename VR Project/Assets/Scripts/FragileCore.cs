@@ -7,8 +7,6 @@ public class FragileCore : MonoBehaviour
     public int pointsOnBreak = -1;
     public int pointsOnSocket = 1;
 
-    // Might glass/crystal material and shatter particle effect here
-
     private GameManager gameManager;
     private Rigidbody rb;
     private bool isSocketed = false;
@@ -43,6 +41,10 @@ public class FragileCore : MonoBehaviour
         if (isSocketed) return;
         isSocketed = true;
         if (gameManager) gameManager.AddPoint(pointsOnSocket);
+
+        // This makes the core "stick" and become non-grabbable
+        GetComponent<XRGrabInteractable>().enabled = false;
+
         // Disable collision checks
         rb.isKinematic = true; // Stop it from moving or breaking
         this.enabled = false;
