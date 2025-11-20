@@ -9,6 +9,14 @@ public class Swing : MonoBehaviour
     //public SnapTurnProviderBase turnProvider;
     public ContinuousTurnProviderBase turnProvider;
 
+    [Header("Visual Polish")]
+    public Color lowTensionColor = Color.white;
+    public Color highTensionColor = Color.red;
+
+    [Header("Wall Repulsion (The Cushion)")]
+    public float cushionForce = 300f;
+    public float cushionDistance = 2.0f; // Push away if closer than 2 meters
+
     // --- Jump ---
     public InputActionProperty jumpAction;
     public float jumpForce = 5f;
@@ -84,6 +92,19 @@ public class Swing : MonoBehaviour
         DrawRope();
     }
 
+    void FixedUpdate()
+    {
+        // 2. NEW: The "Cushion" Safety Push
+        // This works even if you aren't swinging, keeping you off walls
+        RaycastHit hit;
+        // Cast a ray in the direction we are moving
+        if (Physics.Raycast(playerRigidbody.position, playerRigidbody.velocity.normalized, out hit, cushionDistance, swingableLayer))
+        {
+            // If we are about to hit a wall, push BACK smoothly
+            playerRigidbody.AddForce(hit.normal * cushionForce * Time.fixedDeltaTime);
+        }
+    }
+
     public void StartSwing()
     {
         if (hasHit)
@@ -141,9 +162,24 @@ public class Swing : MonoBehaviour
         }
     }
 
+    //public void DrawRope()
+    //{
+    //    if(!joint)
+    //    {
+    //        lineRenderer.enabled = false;
+    //    }
+    //    else
+    //    {
+    //        lineRenderer.enabled = true;
+    //        lineRenderer.positionCount = 2;
+    //        lineRenderer.SetPosition(0, startSwingHand.position);
+    //        lineRenderer.SetPosition(1, swingPoint);
+    //    }
+    //}
+
     public void DrawRope()
     {
-        if(!joint)
+        if (!joint)
         {
             lineRenderer.enabled = false;
         }
@@ -153,8 +189,21 @@ public class Swing : MonoBehaviour
             lineRenderer.positionCount = 2;
             lineRenderer.SetPosition(0, startSwingHand.position);
             lineRenderer.SetPosition(1, swingPoint);
-        }
 
+            // --- NEW: COLOR CHANGE ---
+            if (pullAction.action.IsPressed())
+            {
+                // We are pulling, so show High Tension (Red)
+                lineRenderer.startColor = highTensionColor;
+                lineRenderer.endColor = highTensionColor;
+            }
+            else
+            {
+                // Relaxed (White)
+                lineRenderer.startColor = lowTensionColor;
+                lineRenderer.endColor = lowTensionColor;
+            }
+        }
     }
 
     public void PullRope()
