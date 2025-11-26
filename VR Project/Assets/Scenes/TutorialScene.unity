@@ -2694,6 +2694,7 @@ MonoBehaviour:
       type: 3}
   pullingStrength: 1000
   playerRigidbody: {fileID: 57007484}
+  webShootSound: {fileID: 0}
   lineRenderer: {fileID: 2070469823}
 --- !u!1 &517721736
 GameObject:
@@ -6285,6 +6286,7 @@ MonoBehaviour:
       type: 3}
   pullingStrength: 500
   playerRigidbody: {fileID: 57007484}
+  webShootSound: {fileID: 0}
   lineRenderer: {fileID: 1288688125}
 --- !u!1 &1692396589
 GameObject:
@@ -6391,7 +6393,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MainScene
+          m_StringArgument: MainScene (new)
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1692396592

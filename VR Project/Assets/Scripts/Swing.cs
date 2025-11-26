@@ -9,11 +9,9 @@ public class Swing : MonoBehaviour
     //public SnapTurnProviderBase turnProvider;
     public ContinuousTurnProviderBase turnProvider;
 
-    [Header("Visual Polish")]
     public Color lowTensionColor = Color.white;
     public Color highTensionColor = Color.red;
 
-    [Header("Wall Repulsion (The Cushion)")]
     public float cushionForce = 300f;
     public float cushionDistance = 2.0f; // Push away if closer than 2 meters
 
@@ -40,6 +38,8 @@ public class Swing : MonoBehaviour
 
     // Using a ConfigurableJoint, which can act as a rope.
     private ConfigurableJoint joint;
+
+    public AudioSource webShootSound;
 
     public LineRenderer lineRenderer;
 
@@ -127,11 +127,21 @@ public class Swing : MonoBehaviour
             joint.xMotion = ConfigurableJointMotion.Limited;
             joint.yMotion = ConfigurableJointMotion.Limited;
             joint.zMotion = ConfigurableJointMotion.Limited;
+
+            if (webShootSound != null)
+            {
+                webShootSound.Play();
+            }
         }
     }
 
     public void StopSwing()
     {
+        if (webShootSound != null)
+        {
+            webShootSound.Stop();
+        }
+
         Destroy(joint);
 
         // Re-enable locomotion providers
