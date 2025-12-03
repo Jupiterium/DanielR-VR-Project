@@ -45,6 +45,12 @@ public class Swing : MonoBehaviour
 
     private bool hasHit;
 
+    // Hit object data
+    private Rigidbody hitObjectBody;
+    private Transform hitObjectTransform;
+    private Vector3 hitLocalAnchor; // anchor in hit object's local space
+    private bool followMovingAnchor = false;
+
     void Awake()
     {
         // Find swing & pull actions
@@ -103,6 +109,22 @@ public class Swing : MonoBehaviour
             // If we are about to hit a wall, push BACK smoothly
             playerRigidbody.AddForce(hit.normal * cushionForce * Time.fixedDeltaTime);
         }
+
+        // If we attached to a moving object that is kinematic or moved by Transform,
+        // update the joint's connectedAnchor so the joint follows the object's motion.
+        if (joint != null && followMovingAnchor && hitObjectTransform != null)
+        {
+            // If connectedBody is null, connectedAnchor is in world space and must be updated
+            if (joint.connectedBody == null)
+            {
+                joint.connectedAnchor = hitObjectTransform.TransformPoint(hitLocalAnchor);
+            }
+            else
+            {
+                // connectedBody was set (non-kinematic Rigidbody); keep local anchor
+                joint.connectedAnchor = hitLocalAnchor;
+            }
+        }
     }
 
     public void StartSwing()
@@ -132,6 +154,32 @@ public class Swing : MonoBehaviour
             {
                 webShootSound.Play();
             }
+
+            // Attach to the moving object if appropriate
+            if (hitObjectTransform != null)
+            {
+                // If we have a Rigidbody and it is not kinematic, attach to it directly
+                if (hitObjectBody != null && !hitObjectBody.isKinematic)
+                {
+                    joint.connectedBody = hitObjectBody;
+                    joint.connectedAnchor = hitLocalAnchor; // local to the connected body
+                    followMovingAnchor = false; // Rigidbody will be handled by physics
+                }
+                else
+                {
+                    // Either no Rigidbody or kinematic Rigidbody: keep the anchor in world space
+                    // and update it each FixedUpdate to follow the transform.
+                    joint.connectedBody = null;
+                    joint.connectedAnchor = hitObjectTransform.TransformPoint(hitLocalAnchor);
+                    followMovingAnchor = true;
+                }
+            }
+            else
+            {
+                joint.connectedBody = null;
+                joint.connectedAnchor = swingPoint;
+                followMovingAnchor = false;
+            }
         }
     }
 
@@ -143,6 +191,11 @@ public class Swing : MonoBehaviour
         }
 
         Destroy(joint);
+
+        // Clear moving anchor state
+        followMovingAnchor = false;
+        hitObjectBody = null;
+        hitObjectTransform = null;
 
         // Re-enable locomotion providers
         //if (moveProvider) moveProvider.enabled = true;
@@ -163,12 +216,27 @@ public class Swing : MonoBehaviour
         if (hasHit)
         {
             swingPoint = raycastHit.point;
+
+            // Save hit transform and Rigidbody (if any). Use attachedRigidbody to find Rigidbodies on parents.
+            hitObjectTransform = raycastHit.collider != null ? raycastHit.collider.transform : null;
+            hitObjectBody = raycastHit.collider != null ? raycastHit.collider.attachedRigidbody : null;
+            if (hitObjectBody == null && hitObjectTransform != null)
+                hitObjectBody = hitObjectTransform.GetComponentInParent<Rigidbody>();
+
+            // Record local anchor on the hit transform so we can follow it if needed
+            if (hitObjectTransform != null)
+                hitLocalAnchor = hitObjectTransform.InverseTransformPoint(swingPoint);
+            else
+                hitLocalAnchor = Vector3.zero;
+
             predictionPoint.gameObject.SetActive(true);
             predictionPoint.position = swingPoint;
         }
         else
         {
             predictionPoint.gameObject.SetActive(false);
+            hitObjectBody = null;
+            hitObjectTransform = null;
         }
     }
 
