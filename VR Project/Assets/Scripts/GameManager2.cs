@@ -1,24 +1,22 @@
 using UnityEngine;
-using UnityEngine.Video;
+// We removed UnityEngine.Video since we don't need it anymore
 
-public class GameManager2 : MonoBehaviour
+public class SimpleGameManager : MonoBehaviour
 {
     [Header("Win Condition")]
-    [Tooltip("The GameObject holding the Video Player")]
-    public GameObject videoScreenObject;
+    [Tooltip("The UI Object to turn on when you win (e.g., a Canvas or Panel)")]
+    public GameObject winUIObject;
 
     private int occupiedSockets = 0;
     private const int TARGET_SOCKETS = 3;
     private bool gameWon = false;
 
-    private VideoPlayer videoPlayer;
-
     void Start()
     {
-        if (videoScreenObject != null)
+        // Ensure the Win UI is hidden when the game starts
+        if (winUIObject != null)
         {
-            videoPlayer = videoScreenObject.GetComponent<VideoPlayer>();
-            videoScreenObject.SetActive(false); // Hide screen initially
+            winUIObject.SetActive(false);
         }
     }
 
@@ -39,16 +37,12 @@ public class GameManager2 : MonoBehaviour
     void WinGame()
     {
         gameWon = true;
-        Debug.Log("ALL SOCKETS FILLED. PLAYING VIDEO.");
+        Debug.Log("ALL SOCKETS FILLED. SHOWING WIN UI.");
 
-        if (videoScreenObject != null)
+        // Simply turn on the UI object
+        if (winUIObject != null)
         {
-            videoScreenObject.SetActive(true);
-
-            if (videoPlayer != null)
-            {
-                videoPlayer.Play();
-            }
+            winUIObject.SetActive(true);
         }
     }
 }

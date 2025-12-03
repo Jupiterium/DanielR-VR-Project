@@ -6,7 +6,7 @@ public class Swing : MonoBehaviour
 {
     // --- Locomotion Providers ---
     public ContinuousMoveProviderBase moveProvider;
-    //public SnapTurnProviderBase turnProvider;
+    // public SnapTurnProviderBase turnProvider;
     public ContinuousTurnProviderBase turnProvider;
 
     public Color lowTensionColor = Color.white;
