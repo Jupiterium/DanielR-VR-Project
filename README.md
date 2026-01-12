@@ -159,7 +159,7 @@ The game state is managed by a `GameManager2.cs` singleton. This script tracks t
   </tr>
 </table>
 
-### 4. Limitations & Future Improvements
+## 4. Limitations & Future Improvements
 Currently, the web functions as a straight line connection between a hand and the anchor point. It creates a static tether that clips through buildings rather than wrapping around them physically. In other words, the web attached to a moving object does not follow it respectively. I attempted to solve this by updating the anchor point dynamically, but that didn't really work. The solution is more complex and was out of scope, so I decided to stick with static environment. 
 
 However, that's where future improvements can be made and hence new features can be added such as drones, that will have a specific followed paths around the city, and the player could use them as another way to traverse by attaching web to them. This could then also be followed with assisted aiming to help the player attach to these moving objects easier (also based on playtest reviews).
