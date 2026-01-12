@@ -5,15 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/MainScene (old).unity
+    guid: d2def7f8a7e920c4bacbe16ce8efc45a
   - enabled: 1
-    path: Assets/UnityXR Stuff/Scenes/Create-with-VR-Starter-Scene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/MainScene (new).unity
+    guid: 01ca50bae1866f846b19729decc41075
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 939fd96d32d28aa42971f752db0c71ae
   m_configObjects:
-    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ed72be55522c8448bae8b0d66fa21adf,
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: b8c429e3c4e30f246a5d2c63509f3ec6,
       type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ad4050bc0deda4e238354e959df0f1f4,
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: fcf5782089a431647a165174629678f5,
       type: 2}
-    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: b53b89ca9241447b0a56ff61fa931615,
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: f24c456fc689449428ec5fa8dae0b82b,
       type: 2}
-    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: f4f50c8f8f3454c90a388877cf1a2c81,
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 5eb88f06593a9b947ab8d3014d0cf49c,
       type: 2}
