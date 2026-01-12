@@ -98,7 +98,6 @@ After testing the game with multiple people and some discussions with the lectur
     <td><img src="https://github.com/user-attachments/assets/108e84fe-3fd4-4ef5-bdbf-d08237acebdc" width="500"></td>
      <td><img src="https://github.com/user-attachments/assets/2963e1e1-9908-4976-803e-8ab7e7639bcc" width="500"></td>
      <td><img src="https://github.com/user-attachments/assets/f0f56dc0-5d65-46f6-93f6-e9d060369ae6" width="500"></td>
-     <td><img src="https://github.com/user-attachments/assets/d6ef622a-2def-493e-b4e7-80db0f89d63c" width="500"></td>
      <td><img src="https://github.com/user-attachments/assets/1fcfcbd7-4d35-4cc9-9b92-4ac603aaf226" width="500"></td>
   </tr>
 </table>
